@@ -31,15 +31,15 @@ def make_features(df):
     """
     Genera variables agregadas por equipo (local y visitante).
     """
-    # 1️⃣ Crear columna auxiliar de resultado relativo (desde perspectiva del equipo)
+    #  Crear columna auxiliar de resultado relativo (desde perspectiva del equipo)
     df["HomeResult"] = np.where(df["FTR"] == "H", "W", np.where(df["FTR"] == "D", "D", "L"))
     df["AwayResult"] = np.where(df["FTR"] == "A", "W", np.where(df["FTR"] == "D", "D", "L"))
 
-    # 2️⃣ Calcular stats para locales y visitantes
+    #  Calcular stats para locales y visitantes
     home_stats = rolling_team_stats(df, "HomeTeam", "FTHG", "FTAG", "HomeResult")
     away_stats = rolling_team_stats(df, "AwayTeam", "FTAG", "FTHG", "AwayResult")
 
-    # 3️⃣ Renombrar columnas
+    #  Renombrar columnas
     home_stats = home_stats[["DateTime", "HomeTeam", "GF_avg", "GA_avg", "WinRate"]].rename(
         columns={"GF_avg": "Home_GF_avg", "GA_avg": "Home_GA_avg", "WinRate": "Home_WinRate"}
     )
@@ -47,11 +47,11 @@ def make_features(df):
         columns={"GF_avg": "Away_GF_avg", "GA_avg": "Away_GA_avg", "WinRate": "Away_WinRate"}
     )
 
-    # 4️⃣ Fusionar
+    #  Fusionar
     df_feat = df.merge(home_stats, on=["DateTime", "HomeTeam"], how="left")
     df_feat = df_feat.merge(away_stats, on=["DateTime", "AwayTeam"], how="left")
 
-    # 5️⃣ Diferencias entre equipos
+    #  Diferencias entre equipos
     df_feat["Diff_GF"] = df_feat["Home_GF_avg"] - df_feat["Away_GF_avg"]
     df_feat["Diff_GA"] = df_feat["Home_GA_avg"] - df_feat["Away_GA_avg"]
     df_feat["Diff_WinRate"] = df_feat["Home_WinRate"] - df_feat["Away_WinRate"]
@@ -65,7 +65,7 @@ def enrich_features_and_save(filename: str):
     df_feat = make_features(df)
     out_name = filename.replace("_with_market", "_features")
     df_feat.to_csv(PROCESSED_PATH / out_name, index=False, encoding="utf-8")
-    print(f"✅ Guardado: {out_name} ({len(df_feat)} filas)")
+    print(f" Guardado: {out_name} ({len(df_feat)} filas)")
     return df_feat
 
 

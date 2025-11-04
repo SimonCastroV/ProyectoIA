@@ -37,7 +37,7 @@ def train_logreg(train_path="data/processed/train_set.csv"):
     dump(model, OUTPUT_PATH / "logreg_model.joblib")
     dump(scaler, OUTPUT_PATH / "scaler.joblib")
 
-    print("✅ Modelo LogReg entrenado y guardado.")
+    print(" Modelo LogReg entrenado y guardado.")
     return model, scaler
 
 
@@ -64,14 +64,14 @@ def evaluate_logreg(model, scaler, test_path="data/processed/test_set.csv"):
     bs = brier_score_loss(pd.get_dummies(y_true).values.flatten(), y_proba.flatten())
     acc = np.mean(y_pred == y_true)
 
-    print(f"📊 LogLoss: {ll:.4f} | Brier: {bs:.4f} | Accuracy: {acc:.3f}")
+    print(f" LogLoss: {ll:.4f} | Brier: {bs:.4f} | Accuracy: {acc:.3f}")
     df_pred = df.copy()
     df_pred[["P_H", "P_D", "P_A"]] = y_proba
     df_pred["Predicted"] = y_pred
 
     out_path = PROCESSED_PATH / "predictions_logreg.csv"
     df_pred.to_csv(out_path, index=False, encoding="utf-8")
-    print(f"✅ Predicciones guardadas en: {out_path}")
+    print(f" Predicciones guardadas en: {out_path}")
 
     return df_pred
 

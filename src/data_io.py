@@ -55,18 +55,18 @@ def save_processed(df: pd.DataFrame, name: str):
     PROCESSED_PATH.mkdir(exist_ok=True, parents=True)
     out_path = PROCESSED_PATH / f"{name}.csv"
     df.to_csv(out_path, index=False, encoding="utf-8")
-    print(f"✅ Guardado: {out_path} ({len(df)} filas)")
+    print(f" Guardado: {out_path} ({len(df)} filas)")
 
 
 if __name__ == "__main__":
-    # 1️⃣ Cargar datasets
+    #  Cargar datasets
     df_hist = load_dataset("EPL_Set.csv")
     df_recent = load_dataset("epl_api_recent.csv")
 
-    # 2️⃣ Limpiar
+    #  Limpiar
     df_hist_clean = clean_dataset(df_hist)
     df_recent_clean = clean_dataset(df_recent)
 
-    # 3️⃣ Guardar
+    #  Guardar
     save_processed(df_hist_clean, "EPL_Set_clean")
     save_processed(df_recent_clean, "EPL_Recent_clean")

@@ -440,16 +440,16 @@ def main():
         # Construir features y predecir
         X = build_features_for_pair(df_all, home, away)
 
-        # 🔴 AQUÍ ESTÁ EL CAMBIO: ahora recibimos también 'classes' y 'raw'
+        #  AQUÍ ESTÁ EL CAMBIO: ahora recibimos también 'classes' y 'raw'
         pH, pD, pA, classes, raw = predict_match(model, X, df_all)
 
         # Mostrar probabilidades
         st.subheader(f"{home} vs {away}")
         st.markdown(f"**Probabilidades del modelo {model_name.upper()}:**")
         st.markdown(
-            f"- 🏠 Local (H): **{pct_str(pH)}**  \n"
-            f"- 🤝 Empate (D): **{pct_str(pD)}**  \n"
-            f"- 🧳 Visitante (A): **{pct_str(pA)}**"
+            f"-  Local (H): **{pct_str(pH)}**  \n"
+            f"-  Empate (D): **{pct_str(pD)}**  \n"
+            f"-  Visitante (A): **{pct_str(pA)}**"
         )
 
         # Cuotas justas (1/p)
@@ -469,7 +469,7 @@ def main():
         st.markdown("**Cuotas usadas (sim/mercado):**")
         st.markdown(f"- H: **{oddsH:.2f}** · D: **{oddsD:.2f}** · A: **{oddsA:.2f}**")
 
-        # 🧪 Expander de depuración (opcional)
+        #  Expander de depuración (opcional)
         with st.expander("Detalles técnicos (debug)"):
             st.write("classes_ del modelo:", classes)
             st.write("fila predict_proba cruda:", [float(x) for x in np.ravel(raw)])
@@ -477,8 +477,8 @@ def main():
         # Veredicto: solo Local o Visitante (ignora empates)
         pick = "H" if pH >= pA else "A"
         label = {"H": "Local", "A": "Visitante"}[pick]
-        emoji = {"H": "🏠", "A": "🧳"}[pick]
-        st.success(f"👉 **Gana:** {emoji} **{label}**")  
+        emoji = {"H": "", "A": ""}[pick]
+        st.success(f" **Gana:** {emoji} **{label}**")  
 
 if __name__ == "__main__":
     main()
