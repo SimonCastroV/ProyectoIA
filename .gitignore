@@ -1,0 +1,61 @@
+# ===== Python bytecode / caches =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.pytype/
+.pyre/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.cache/
+
+# ===== Virtual envs =====
+.venv/
+venv/
+env/
+ENV/
+
+# ===== Notebooks cache =====
+.ipynb_checkpoints/
+
+# ===== Logs / temporales =====
+*.log
+*.tmp
+*.bak
+*.swp
+
+# ===== Editors / IDE =====
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ===== Streamlit =====
+.streamlit/**/cache*/
+.streamlit/**/cache
+.streamlit/secrets.toml
+# (opcional) permite config local si lo necesitas:
+#!.streamlit/config.toml
+
+# ===== Builds / empaquetado =====
+build/
+dist/
+*.egg-info/
+
+# ===== Sistema operativo =====
+.DS_Store
+Thumbs.db
+desktop.ini
+Icon?
+
+# ===== Secretos / env =====
+.env
+.env.*
+*.env
+.envrc
+
+# ===== Cobertura (si usas tests) =====
+.coverage
+htmlcov/
